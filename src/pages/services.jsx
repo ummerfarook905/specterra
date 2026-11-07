@@ -1,9 +1,6 @@
 
 import {
   CheckCircle2,
-  ArrowRight,
-  Download,
-  FlaskConical,
 } from "lucide-react";
 import etpImage from "../assets/water.png";
 

@@ -56,8 +56,7 @@ export default function Navbar() {
 
         {/* MAIN GLASS NAVBAR */}
         <div
-          className={`
-            relative flex items-center justify-between
+          className={`relative flex items-center justify-between
             min-h-[55px] md:min-h-[64px]
             px-3 sm:px-5 md:px-6
             rounded-full
@@ -65,34 +64,26 @@ export default function Navbar() {
             shadow-[0_5px_25px_rgba(0,0,0,0.22),inset_0_1px_8px_rgba(255,255,255,0.12)]
             backdrop-blur-xl
             transition-all duration-500
-            ${
-              isScrolled
-                ? "bg-[#092b26]/85"
-                : "bg-[#092b26]/80"
-            }
-          `}
-        >
+            ${isScrolled ? "bg-[#092b26]/85" : "bg-[#092b26]/80"}`}
+         >
 
           {/* SUBTLE TOP GLOW */}
           <div className="absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-[#c2ff91]/80 to-transparent pointer-events-none" />
 
           {/* LEFT - SPECTERRA LOGO */}
-          <Link
-            to="/"
-            className="relative z-10 flex items-center gap-1.5 md:gap-2 shrink-0"
-          >
+          <div className="flex items-center gap-2 rounded-full bg-black/50 px-4 py-2 backdrop-blur-md">
             <img
               src={logoIcon}
-              alt="Specterra Symbol"
-              className="w-[27px] h-[27px] sm:w-[32px] sm:h-[32px] md:w-[36px] md:h-[36px] object-contain"
+              alt="Specterra logo"
+              className="h-8 w-8 object-contain drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
             />
 
             <img
               src={logoName}
               alt="SPECTERRA"
-              className="w-[95px] sm:w-[115px] md:w-[145px] h-auto object-contain"
+              className="h-7 w-auto object-contain drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
             />
-          </Link>
+          </div>
 
           {/* CENTER - DESKTOP NAVIGATION */}
           <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-6 lg:gap-9">
@@ -180,7 +171,7 @@ export default function Navbar() {
                 md:hidden
                 rounded-[20px]
                 border border-[#9dfb58]/30
-                bg-[#102c27]/95
+               bg-white/10 backdrop-blur-2xl
                 backdrop-blur-2xl
                 shadow-[0_15px_40px_rgba(0,0,0,0.3)]
                 p-3

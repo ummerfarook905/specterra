@@ -15,6 +15,7 @@ import {
   Droplets,
   Recycle,
 } from "lucide-react";
+import TrustedPartners from "../components/trustedPartners";
 
 const stats = [
   { value: "15+", label: "Years of Experience", icon: Settings },
@@ -167,8 +168,10 @@ export default function Home() {
       {/* EXISTING SERVICES PAGE */}
       <Services />
 
+      <TrustedPartners />
+
       {/* EXISTING ABOUT PAGE */}
-      <About />
+      <About  show="company" />
 
       {/* EXISTING CONTACT PAGE */}
       <Contact />
