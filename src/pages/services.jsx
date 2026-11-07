@@ -5,13 +5,13 @@ import {
   Download,
   FlaskConical,
 } from "lucide-react";
+import etpImage from "../assets/water.png";
 
 const services = [
   {
     category: "ETP SYSTEMS",
     title: "ETP (Effluent Treatment Plants)",
-    image:
-      "https://images.unsplash.com/photo-1581093458791-9d42e3c2c7d3?auto=format&fit=crop&w=900&q=85",
+    image: etpImage,
     description:
       "Turnkey design, fabrication, civil works, and commissioning of primary, secondary, and tertiary Effluent Treatment Plants tailored for pharmaceutical, chemical, textile, and manufacturing industries. Zero Liquid Discharge (ZLD) enabled.",
     features: [
