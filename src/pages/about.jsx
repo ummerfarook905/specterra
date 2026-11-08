@@ -10,6 +10,7 @@ import venkadesh from "../assets/venkadesh.png";
 import priya from "../assets/priya.png";
 import arun from "../assets/arun.png";
 import logoIcon from "../assets/logo.png";
+import StrategicRoadmap from "../components/strategicRoadmap";
 
 const features = [
   {
@@ -116,7 +117,7 @@ const teamMembers = [
               Engineering Sustainable Equilibrium for Indian Industry
             </h1>
 
-            <p className="text-[14px] leading-6 text-[#46504b] mt-2 max-w-[720px]">
+            <p className="text-[16px] leading-6 text-[#46504b] mt-2 max-w-[720px]">
               Specterra Environmental Engineering Solutions is an ISO
               9001:2015 and ISO 14001:2015 certified consulting and
               infrastructure practice headquartered in Bengaluru.
@@ -144,7 +145,7 @@ const teamMembers = [
                     {feature.title}
                   </h3>
 
-                  <p className="text-[12px] leading-[20px] text-[#46504b]">
+                  <p className="text-[14px] leading-[20px] text-[#46504b]">
                     {feature.description}
                   </p>
                 </div>
@@ -174,7 +175,7 @@ const teamMembers = [
               <sup className="text-[8px] ml-0.5">®</sup>
             </h2>
 
-            <p className="text-[8px] font-bold tracking-wide text-[#244f35] mt-1">
+            <p className="text-[10px] font-bold tracking-wide text-[#244f35] mt-1">
               AN ISO CERTIFIED COMPANY
             </p>
           </div>
@@ -182,18 +183,18 @@ const teamMembers = [
           {/* Executive Information */}
           <div className="w-full mb-5">
 
-            <p className="text-[11px] font-bold tracking-[0.7px] uppercase text-[#527b0b] mb-1">
+            <p className="text-[13px] font-bold tracking-[0.7px] uppercase text-[#527b0b] mb-1">
               Certified Executive Leadership
             </p>
 
-            <blockquote className="font-serif italic text-[15px] leading-[24px] text-[#222] mb-2">
+            <blockquote className="font-serif italic text-[17px] leading-[24px] text-[#222] mb-2">
               "Our mission is to decouple industrial manufacturing
               productivity from freshwater exhaustion, delivering
               foolproof regulatory compliance through sound
               hydrological science."
             </blockquote>
 
-            <h3 className="font-serif font-bold text-[13px] text-[#063629]">
+            <h3 className="font-serif font-bold text-[15px] text-[#063629]">
               Dr. R. Venkatesh, Ph.D.
             </h3>
 
@@ -207,28 +208,28 @@ const teamMembers = [
           <div className="w-full bg-[#f0f4f1] rounded-[4px] px-2 py-4 grid grid-cols-3 divide-x divide-[#c8d2cc]">
 
             <div className="px-1">
-              <h4 className="font-serif text-[11px] font-bold tracking-wide text-[#063629]">
+              <h4 className="font-serif text-[13px] font-bold tracking-wide text-[#063629]">
                 ISO 9001:2015
               </h4>
-              <p className="text-[10px] text-[#46504b]">
+              <p className="text-[12px] text-[#46504b]">
                 Quality Control
               </p>
             </div>
 
             <div className="px-1">
-              <h4 className="font-serif text-[11px] font-bold tracking-wide text-[#063629]">
+              <h4 className="font-serif text-[13px] font-bold tracking-wide text-[#063629]">
                 ISO 14001:2015
               </h4>
-              <p className="text-[10px] text-[#46504b]">
+              <p className="text-[12px] text-[#46504b]">
                 Ecological Mgt
               </p>
             </div>
 
             <div className="px-1">
-              <h4 className="font-serif text-[11px] font-bold tracking-wide text-[#527b0b]">
+              <h4 className="font-serif text-[13px] font-bold tracking-wide text-[#527b0b]">
                 NABL / QCI
               </h4>
-              <p className="text-[10px] text-[#46504b]">
+              <p className="text-[12px] text-[#46504b]">
                 Accredited EIA
               </p>
             </div>
@@ -266,7 +267,7 @@ function LeadershipSection() {
             </h2>
           </div>
 
-          <p className="max-w-[450px] text-[9px] leading-[15px] text-[#46504b] md:justify-self-end md:text-[10px]">
+          <p className="max-w-[450px] text-[9px] leading-[15px] text-[#46504b] md:justify-self-end md:text-[12px]">
             Doctoral researchers, accredited EIA directors, and licensed
             hydrologists directing statutory compliance, biological
             engineering, and turnkey plant execution across South India.
@@ -304,7 +305,7 @@ function LeadershipSection() {
                 </span>
 
                 {/* EXPERIENCE BADGE */}
-                <span className="absolute bottom-1.5 right-1.5 rounded-[2px] bg-[#a8e85c] px-1.5 py-0.5 text-[7px] font-bold text-[#153b20]">
+                <span className="absolute bottom-1.5 right-1.5 rounded-[2px] bg-[#a8e85c] px-1.5 py-0.5 text-[9px] font-bold text-[#153b20]">
                   {member.experience}
                 </span>
               </div>
@@ -313,22 +314,22 @@ function LeadershipSection() {
               <div className="flex flex-1 flex-col p-2 sm:p-2.5">
 
                 {/* NAME */}
-                <h3 className="font-serif text-[16px] font-bold leading-tight text-[#063629]">
+                <h3 className="font-serif text-[18px] font-bold leading-tight text-[#063629]">
                   {member.name}
                 </h3>
 
                 {/* QUALIFICATION */}
-                <p className="mt-0.5 text-[10px] font-bold leading-[12px] text-[#527b0b]">
+                <p className="mt-0.5 text-[12px] font-bold leading-[12px] text-[#527b0b]">
                   {member.qualification}
                 </p>
 
                 {/* DESIGNATION */}
-                <p className="text-[10px] leading-[12px] text-[#46504b]">
+                <p className="text-[12px] leading-[12px] text-[#46504b]">
                   {member.designation}
                 </p>
 
                 {/* DESCRIPTION */}
-                <p className="mt-2 text-[10px] leading-[13px] text-[#343d38]">
+                <p className="mt-2 text-[12px] leading-[13px] text-[#343d38]">
                   {member.description}
                 </p>
 
@@ -337,7 +338,7 @@ function LeadershipSection() {
                   {member.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="border border-[#dce5df] bg-[#edf3ef] px-1 py-0.5 text-[9px] font-semibold leading-tight text-[#244b36]"
+                      className="border border-[#dce5df] bg-[#edf3ef] px-1 py-0.5 text-[11px] font-semibold leading-tight text-[#244b36]"
                     >
                       {skill}
                     </span>
@@ -347,7 +348,7 @@ function LeadershipSection() {
                 {/* BOTTOM INFORMATION */}
                 <div className="mt-auto pt-3">
 
-                  <div className="mb-1.5 flex items-center justify-between gap-1 border-t border-[#e3e9e5] pt-2 text-[9px]">
+                  <div className="mb-1.5 flex items-center justify-between gap-1 border-t border-[#e3e9e5] pt-2 text-[11px]">
                     <span className="truncate text-[#68756d]">
                       {member.location}
                     </span>
@@ -381,6 +382,8 @@ export default function About({ show = "all" }) {
       {(show === "all" || show === "leadership") && (
         <LeadershipSection />
       )}
+
+      {show === "all" && <StrategicRoadmap />}
     </main>
   );
 }

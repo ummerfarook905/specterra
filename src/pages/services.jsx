@@ -70,7 +70,7 @@ function ServiceCard({ service }) {
 
         {/* Category Badge */}
         <div className="absolute top-2 left-2 bg-[#063629] px-3 py-1">
-          <span className="font-serif text-[10px] tracking-wide font-bold text-white">
+          <span className="font-serif text-[12px] tracking-wide font-bold text-white">
             {service.category}
           </span>
         </div>
@@ -84,7 +84,7 @@ function ServiceCard({ service }) {
           {service.title}
         </h2>
 
-        <p className="text-[12px] leading-[20px] text-[#46504b] mb-3">
+        <p className="text-[14px] leading-[20px] text-[#46504b] mb-3">
           {service.description}
         </p>
 
@@ -93,7 +93,7 @@ function ServiceCard({ service }) {
           {service.features.map((feature, index) => (
             <li
               key={index}
-              className="flex items-center gap-1.5 font-serif text-[11px] font-bold tracking-wide text-[#063629]"
+              className="flex items-center gap-1.5 font-serif text-[13px] font-bold tracking-wide text-[#063629]"
             >
               <CheckCircle2
                 size={14}
@@ -132,7 +132,7 @@ export default function Services() {
               Industry & Municipalities
             </h1>
 
-            <p className="text-[14px] leading-6 text-[#46504b] mt-2">
+            <p className="text-[16px] leading-6 text-[#46504b] mt-2">
               From heavy pharmaceutical effluent remediation to sensitive
               hydrogeological surveys, Specterra deploys certified systems
               backed by institutional engineering rigor.

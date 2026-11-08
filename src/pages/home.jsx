@@ -175,7 +175,7 @@ export default function Home() {
       {/* EXISTING ABOUT PAGE */}
       <About  show="company" />
 
-      <StrategicRoadmap />
+      {/* <StrategicRoadmap /> */}
 
       {/* EXISTING CONTACT PAGE */}
       <Contact />

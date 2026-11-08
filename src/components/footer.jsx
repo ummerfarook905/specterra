@@ -17,11 +17,11 @@ export default function Footer() {
               SPECTERRA
             </h2>
 
-            <p className="font-serif text-[11px] font-bold tracking-[0.5px] text-[#46504b] mt-1">
+            <p className="font-serif text-[14px] font-bold tracking-[0.5px] text-[#46504b] mt-1">
               ENVIRONMENTAL ENGINEERING SOLUTIONS
             </p>
 
-            <p className="text-[12px] leading-[20px] mt-4 max-w-[370px]">
+            <p className="text-[14px] leading-[20px] mt-4 max-w-[370px]">
               Pioneering advanced wastewater telemetry, environmental
               impact audits, zero liquid discharge infrastructure, and
               regulatory statutory clearance architecture across India.
@@ -33,11 +33,11 @@ export default function Footer() {
               <BadgeCheck size={17} className="text-[#a7e64c] shrink-0" />
 
               <div>
-                <p className="font-serif text-[11px] font-bold tracking-wide">
+                <p className="font-serif text-[14px] font-bold tracking-wide">
                   ISO 9001:2015 & ISO 14001:2015
                 </p>
 
-                <p className="font-serif text-[9px] text-[#b9d2c6]">
+                <p className="font-serif text-[12px] text-[#b9d2c6]">
                   Accredited Environmental Consultant
                 </p>
               </div>
@@ -47,11 +47,11 @@ export default function Footer() {
 
           {/* QUICK LINKS */}
             <div>
-              <h3 className="font-serif text-[12px] font-bold tracking-wide text-[#063629] uppercase mb-3">
+              <h3 className="font-serif text-[14px] font-bold tracking-wide text-[#063629] uppercase mb-3">
                 Quick Links
               </h3>
 
-              <ul className="space-y-[6px] text-[12px] leading-[18px]">
+              <ul className="space-y-[6px] text-[14px] leading-[18px]">
 
                 <li>
                   <Link
@@ -98,7 +98,7 @@ export default function Footer() {
               Regulatory Liaison
             </h3>
 
-            <ul className="space-y-[6px] text-[12px] leading-[18px]">
+            <ul className="space-y-[6px] text-[14px] leading-[18px]">
               <li>Effluent Treatment Plants (ETP)</li>
               <li>Sewage Treatment Plants (STP)</li>
               <li>Zero Liquid Discharge (ZLD)</li>
@@ -114,7 +114,7 @@ export default function Footer() {
               Registered Office
             </h3>
 
-            <div className="text-[12px] leading-[20px]">
+            <div className="text-[14px] leading-[20px]">
               <p>
                 Specterra Towers, Plot #48-B
                 <br />

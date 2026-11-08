@@ -75,13 +75,13 @@ export default function Navbar() {
             <img
               src={logoIcon}
               alt="Specterra logo"
-              className="h-8 w-8 object-contain drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
+              className="h-8 w-8 object-contain]"
             />
 
             <img
               src={logoName}
               alt="SPECTERRA"
-              className="h-7 w-auto object-contain drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
+              className="h-7 w-auto object-contain ]"
             />
           </div>
 
@@ -93,7 +93,7 @@ export default function Navbar() {
                 to={link.path}
                 end={link.path === "/"}
                 className={({ isActive }) =>
-                  `relative py-2 text-[12px] lg:text-[13px] font-semibold
+                  `relative py-2 text-[12px] lg:text-[15px] font-semibold
                   transition-colors duration-300
                   ${
                     isActive
@@ -122,7 +122,7 @@ export default function Navbar() {
             className="
               hidden md:inline-flex items-center justify-center gap-3
               bg-white text-[#073b27]
-              text-[12px] lg:text-[13px] font-bold
+              text-[12px] lg:text-[15px] font-bold
               px-4 lg:px-5 py-2.5
               rounded-full
               border border-[#b8f77b]
