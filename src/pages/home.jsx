@@ -16,6 +16,8 @@ import {
   Recycle,
 } from "lucide-react";
 import TrustedPartners from "../components/trustedPartners";
+import StrategicRoadmap from "../components/strategicRoadmap";
+import AppDownload from "../components/appDownload";
 
 const stats = [
   { value: "15+", label: "Years of Experience", icon: Settings },
@@ -173,8 +175,12 @@ export default function Home() {
       {/* EXISTING ABOUT PAGE */}
       <About  show="company" />
 
+      <StrategicRoadmap />
+
       {/* EXISTING CONTACT PAGE */}
       <Contact />
+
+      <AppDownload />
     </>
   );
 }

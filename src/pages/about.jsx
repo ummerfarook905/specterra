@@ -9,6 +9,7 @@ import meenakshi from "../assets/meenakshi.png";
 import venkadesh from "../assets/venkadesh.png";
 import priya from "../assets/priya.png";
 import arun from "../assets/arun.png";
+import logoIcon from "../assets/logo.png";
 
 const features = [
   {
@@ -160,9 +161,12 @@ const teamMembers = [
           <div className="mb-9 flex flex-col items-center">
 
             {/* Logo Symbol */}
-            <div className="relative w-12 h-10 mb-1 flex items-center justify-center">
-              <div className="absolute w-6 h-6 border-[4px] border-[#123e2c] rotate-45" />
-              <div className="absolute w-3 h-3 border-[3px] border-[#9ba91d] rotate-45 bg-white" />
+            <div className="mb-1 flex h-12 w-12 items-center justify-center">
+              <img
+                src={logoIcon}
+                alt="Specterra Logo"
+                className="h-full w-full object-contain"
+              />
             </div>
 
             <h2 className="text-[21px] font-black tracking-tight text-[#16442e] leading-none">

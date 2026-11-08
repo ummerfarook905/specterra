@@ -71,7 +71,7 @@ export default function Navbar() {
           <div className="absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-[#c2ff91]/80 to-transparent pointer-events-none" />
 
           {/* LEFT - SPECTERRA LOGO */}
-          <div className="flex items-center gap-2 rounded-full bg-black/50 px-4 py-2 backdrop-blur-md">
+          <div className="flex items-center gap-2 rounded-full bg-white px-4 py-2 backdrop-blur-md">
             <img
               src={logoIcon}
               alt="Specterra logo"
