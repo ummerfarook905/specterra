@@ -46,6 +46,18 @@ export default function Navbar() {
     { name: "Contact Us", path: "/contact" },
   ];
 
+  const handleNavClick = (path) => {
+  setIsOpen(false);
+
+  if (path === "/" && isHomePage) {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+};
+
+
   return (
     <nav
       className={`sticky top-0 z-50 w-full px-3 sm:px-5 pt-2 md:pt-3 ${
@@ -92,6 +104,7 @@ export default function Navbar() {
                 key={link.name}
                 to={link.path}
                 end={link.path === "/"}
+                onClick={() => handleNavClick(link.path)}
                 className={({ isActive }) =>
                   `relative py-2 text-[12px] lg:text-[15px] font-semibold
                   transition-colors duration-300
@@ -185,7 +198,7 @@ export default function Navbar() {
                     key={link.name}
                     to={link.path}
                     end={link.path === "/"}
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => handleNavClick(link.path)}
                     className={({ isActive }) =>
                       `
                         px-4 py-3 rounded-xl

@@ -119,7 +119,7 @@ const teamMembers = [
 
             <p className="text-[16px] leading-6 text-[#46504b] mt-2 max-w-[720px]">
               Specterra Environmental Engineering Solutions is an ISO
-              9001:2015 and ISO 14001:2015 certified consulting and
+              9001:2015 certified consulting and
               infrastructure practice headquartered in Bengaluru.
               We bridge heavy industrial manufacturing with stringent
               statutory ecological thresholds.
@@ -205,9 +205,10 @@ const teamMembers = [
           </div>
 
           {/* Certification Bar */}
-          <div className="w-full bg-[#f0f4f1] rounded-[4px] px-2 py-4 grid grid-cols-3 divide-x divide-[#c8d2cc]">
+          <div className="grid w-full grid-cols-2 place-items-center rounded-[4px] bg-[#f0f4f1] px-2 py-4 divide-x divide-[#c8d2cc]">
 
-            <div className="px-1">
+            {/* ISO */}
+            <div className="flex w-full flex-col items-center justify-center text-center">
               <h4 className="font-serif text-[13px] font-bold tracking-wide text-[#063629]">
                 ISO 9001:2015
               </h4>
@@ -216,16 +217,8 @@ const teamMembers = [
               </p>
             </div>
 
-            <div className="px-1">
-              <h4 className="font-serif text-[13px] font-bold tracking-wide text-[#063629]">
-                ISO 14001:2015
-              </h4>
-              <p className="text-[12px] text-[#46504b]">
-                Ecological Mgt
-              </p>
-            </div>
-
-            <div className="px-1">
+            {/* NABL / QCI */}
+            <div className="flex w-full flex-col items-center justify-center text-center">
               <h4 className="font-serif text-[13px] font-bold tracking-wide text-[#527b0b]">
                 NABL / QCI
               </h4>
@@ -379,11 +372,11 @@ export default function About({ show = "all" }) {
     <main>
       {(show === "all" || show === "company") && <AboutSection />}
 
+      {show === "all" && <StrategicRoadmap />}
+
       {(show === "all" || show === "leadership") && (
         <LeadershipSection />
       )}
-
-      {show === "all" && <StrategicRoadmap />}
     </main>
   );
 }

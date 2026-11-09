@@ -1,195 +1,179 @@
-
-import { BadgeCheck } from "lucide-react";
+import { BadgeCheck, ChevronRight, Mail, MapPin, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
+import footerLogo from "../assets/footer.png";
+
+const quickLinks = [
+  { label: "Home", to: "/" },
+  { label: "Services", to: "/services" },
+  { label: "About Us", to: "/about" },
+  { label: "Contact Us", to: "/contact" },
+];
+
+const regulatoryServices = [
+  "Effluent Treatment Plants (ETP)",
+  "Sewage Treatment Plants (STP)",
+  "Zero Liquid Discharge (ZLD)",
+  "Continuous Emission Telemetry (CEMS)",
+  "Hazardous Waste Management",
+  "Environmental Impact Assessment",
+];
+
+function FooterHeading({ children }) {
+  return (
+    <h3 className="mb-5 font-serif text-sm font-bold uppercase tracking-wide text-[#063629]">
+      {children}
+      <span className="mt-3 block h-1 w-12 rounded-full bg-[#9bdc28]" />
+    </h3>
+  );
+}
+
+function ContactLine({ icon: Icon, children, href }) {
+  const content = (
+    <span className="flex items-start gap-2.5">
+      <Icon size={17} className="mt-0.5 shrink-0 text-[#57951e]" aria-hidden="true" />
+      <span>{children}</span>
+    </span>
+  );
+
+  return href ? (
+    <a href={href} className="block transition-colors hover:text-[#17613e]">
+      {content}
+    </a>
+  ) : (
+    <div>{content}</div>
+  );
+}
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#f0f4f2] text-[#424b46] px-6 md:px-8 lg:px-11 pt-10 pb-6">
-
-      <div className="max-w-[1440px] mx-auto">
-
-        {/* MAIN FOOTER */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1.65fr_1.15fr_0.75fr_1.2fr] gap-8 lg:gap-10">
-
-          {/* COMPANY INFORMATION */}
-          <div>
-            <h2 className="font-serif text-[20px] font-bold text-[#063629] leading-tight">
-              SPECTERRA
-            </h2>
-
-            <p className="font-serif text-[14px] font-bold tracking-[0.5px] text-[#46504b] mt-1">
-              ENVIRONMENTAL ENGINEERING SOLUTIONS
-            </p>
-
-            <p className="text-[14px] leading-[20px] mt-4 max-w-[370px]">
-              Pioneering advanced wastewater telemetry, environmental
-              impact audits, zero liquid discharge infrastructure, and
-              regulatory statutory clearance architecture across India.
-            </p>
-
-            {/* Certification Badge */}
-            <div className="inline-flex items-center gap-2 bg-[#104735] text-white rounded-[4px] px-4 py-2 mt-4">
-
-              <BadgeCheck size={17} className="text-[#a7e64c] shrink-0" />
-
-              <div>
-                <p className="font-serif text-[14px] font-bold tracking-wide">
-                  ISO 9001:2015 & ISO 14001:2015
-                </p>
-
-                <p className="font-serif text-[12px] text-[#b9d2c6]">
-                  Accredited Environmental Consultant
-                </p>
-              </div>
-
+    <footer className="w-full bg-[#f0f4f2] px-5 py-10 text-[#424b46] sm:px-7 lg:px-10 lg:py-12">
+      <div className="mx-auto max-w-[1600px]">
+        {/* FIVE-COLUMN FOOTER */}
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-[1.55fr_0.72fr_1.25fr_1fr_1.15fr] lg:gap-0">
+          {/* COMPANY */}
+          <section className="lg:pr-7">
+            {/* COMPANY LOGO */}
+            <div className="mb-4 flex items-center">
+              <img
+                src={footerLogo}
+                alt="SPECTERRA Environmental Engineering Solutions"
+                className="h-auto w-full max-w-[200px] object-contain object-left"
+              />
             </div>
-          </div>
+            <p className="mt-5 max-w-[460px] text-sm leading-6">
+              Pioneering advanced wastewater telemetry, environmental impact
+              audits, zero liquid discharge infrastructure, and regulatory
+              statutory clearance architecture across India.
+            </p>
+            <div className="mt-6 inline-flex max-w-full items-center gap-3 rounded-md bg-[#104735] px-4 py-3 text-white shadow-sm">
+              <BadgeCheck size={27} className="shrink-0 text-[#a7e64c]" />
+              <span className="h-9 w-px shrink-0 bg-white/30" />
+              <span>
+                <span className="block font-serif text-sm font-bold leading-5 sm:text-[15px]">
+                  ISO 9001:2015
+                </span>
+                <span className="block font-serif text-xs leading-4 text-[#c5d9cf]">
+                  Accredited Environmental Consultant
+                </span>
+              </span>
+            </div>
+          </section>
 
           {/* QUICK LINKS */}
-            <div>
-              <h3 className="font-serif text-[14px] font-bold tracking-wide text-[#063629] uppercase mb-3">
-                Quick Links
-              </h3>
-
-              <ul className="space-y-[6px] text-[14px] leading-[18px]">
-
-                <li>
-                  <Link
-                    to="/"
-                    className="hover:text-[#104735] transition-colors duration-200 cursor-pointer"
-                  >
-                    Home
+          <section className="border-t border-[#cbd8d0] pt-6 sm:border-t-0 sm:pt-0 lg:border-l lg:px-6 lg:pt-0">
+            <FooterHeading>Quick Links</FooterHeading>
+            <ul className="space-y-4 text-sm">
+              {quickLinks.map((item) => (
+                <li key={item.to}>
+                  <Link to={item.to} className="group flex items-center gap-2 transition-colors hover:text-[#17613e]">
+                    <ChevronRight size={16} className="shrink-0 text-[#57951e] transition-transform group-hover:translate-x-1" />
+                    {item.label}
                   </Link>
                 </li>
-
-                <li>
-                  <Link
-                    to="/services"
-                    className="hover:text-[#104735] transition-colors duration-200 cursor-pointer"
-                  >
-                    Services
-                  </Link>
-                </li>
-
-                <li>
-                  <Link
-                    to="/about"
-                    className="hover:text-[#104735] transition-colors duration-200 cursor-pointer"
-                  >
-                    About Us
-                  </Link>
-                </li>
-
-                <li>
-                  <Link
-                    to="/contact"
-                    className="hover:text-[#104735] transition-colors duration-200 cursor-pointer"
-                  >
-                    Contact Us
-                  </Link>
-                </li>
-
-              </ul>
-            </div>
+              ))}
+            </ul>
+          </section>
 
           {/* REGULATORY LIAISON */}
-          <div>
-            <h3 className="font-serif text-[12px] font-bold tracking-wide text-[#063629] uppercase mb-3">
-              Regulatory Liaison
-            </h3>
-
-            <ul className="space-y-[6px] text-[14px] leading-[18px]">
-              <li>Effluent Treatment Plants (ETP)</li>
-              <li>Sewage Treatment Plants (STP)</li>
-              <li>Zero Liquid Discharge (ZLD)</li>
-              <li>Continuous Emission Telemetry (CEMS)</li>
-              <li>Hazardous Waste Management</li>
-              <li>Environmental Impact Assessment</li>
+          <section className="border-t border-[#cbd8d0] pt-6 sm:border-t-0 sm:pt-0 lg:border-l lg:px-6 lg:pt-0">
+            <FooterHeading>Regulatory Liaison</FooterHeading>
+            <ul className="space-y-3 text-sm leading-5">
+              {regulatoryServices.map((service) => (
+                <li key={service} className="flex items-start gap-2">
+                  <ChevronRight size={16} className="mt-0.5 shrink-0 text-[#57951e]" />
+                  <span>{service}</span>
+                </li>
+              ))}
             </ul>
-          </div>
+          </section>
 
-          {/* REGISTERED OFFICE */}
-          <div>
-            <h3 className="font-serif text-[12px] font-bold tracking-wide text-[#063629] uppercase mb-3">
-              Registered Office
-            </h3>
+          {/* HEAD OFFICE */}
+          <section className="border-t border-[#cbd8d0] pt-6 sm:border-t-0 sm:pt-0 lg:border-l lg:px-6 lg:pt-0">
+            <FooterHeading>Head Office</FooterHeading>
+            <div className="space-y-5 text-sm leading-5">
+              <ContactLine icon={MapPin}>
+                Ramankeriyil Building,<br />
+                Chengalam South PO,<br />
+                Kottayam 686022
+              </ContactLine>
+              <ContactLine icon={Phone} href="tel:+919188330335">
+                <strong className="font-serif text-[#222]">Direct:</strong> +91 9188330335
+              </ContactLine>
+              <ContactLine icon={Mail} href="mailto:project@specterra.in">
+                <strong className="font-serif text-[#222]">Email:</strong> project@specterra.in
+              </ContactLine>
+            </div>
+          </section>
 
-            <div className="text-[14px] leading-[20px]">
-              <p>
-                Specterra Towers, Plot #48-B
-                <br />
-                Peenya Industrial Area, 2nd Phase
-                <br />
-                Bengaluru, Karnataka - 560058
-              </p>
+          {/* BRANCH OFFICES */}
+          <section className="border-t border-[#cbd8d0] pt-6 sm:border-t-0 sm:pt-0 lg:border-l lg:pl-6 lg:pt-0">
+            <FooterHeading>Branch Offices</FooterHeading>
+            <div className="space-y-6 text-sm leading-5">
+              <div className="space-y-3">
+                <p className="font-semibold text-[#063629]">SPECTERRA ENVIRO CONSULTANTS</p>
+                <ContactLine icon={MapPin}>
+                  Ground floor, Lourde Matha Church Building, Aruvikuzhi PO,
+                  Kottayam 686503
+                </ContactLine>
+                <ContactLine icon={Phone} href="tel:+919567700335">
+                  <strong className="font-serif text-[#222]">Direct:</strong> +91 9567700335
+                </ContactLine>
+              </div>
 
-              <div className="mt-2 space-y-0.5">
-                <p>
-                  <strong className="font-serif text-[#222]">Desk:</strong>{" "}
-                  <a href="tel:+9108023456789" className="hover:text-[#104735]">
-                    +91 (080) 2345 6789
-                  </a>
-                </p>
-
-                <p>
-                  <strong className="font-serif text-[#222]">Direct:</strong>{" "}
-                  <a href="tel:+919845012345" className="hover:text-[#104735]">
-                    +91 98450 12345
-                  </a>
-                </p>
-
-                <p>
-                  <strong className="font-serif text-[#222]">Email:</strong>{" "}
-                  <a
-                    href="mailto:compliance@specterra.com"
-                    className="hover:text-[#104735] break-all"
-                  >
-                    compliance@specterra.com
-                  </a>
-                </p>
+              <div className="space-y-3 border-t border-[#cbd8d0] pt-4">
+                <p className="font-semibold text-[#063629]">SPECTERRA ENVIRO GEO CONSULTANTS</p>
+                <ContactLine icon={MapPin}>
+                  Kuttappy Complex, Nanminda 14, Balussery PO, Kozhikode 673613
+                </ContactLine>
+                <ContactLine icon={Phone} href="tel:+918075364268">
+                  <strong className="font-serif text-[#222]">Direct:</strong> +91 8075364268
+                </ContactLine>
               </div>
             </div>
-          </div>
-
+          </section>
         </div>
 
         {/* BOTTOM FOOTER */}
-        <div className="mt-14 pt-4 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-5">
-
-          <p className="text-[12px] text-[#46504b] leading-5">
-            © 2025 Specterra Engineering & Environmental Pvt. Ltd.
-            All rights reserved. Registered ISO Certified Enterprise.
+        <div className="mt-10 flex flex-col items-start justify-between gap-5 border-t border-[#9fb9a9] pt-5 lg:flex-row lg:items-center">
+          <p className="text-xs leading-5 text-[#46504b]">
+            © 2025 Specterra Engineering &amp; Environmental Pvt. Ltd. All rights
+            reserved. Registered ISO Certified Enterprise.
           </p>
-
-          <div className="flex flex-wrap items-center gap-x-7 gap-y-3">
-
-            <a
-              href="#statutory-terms"
-              className="font-serif text-[11px] font-bold tracking-wide hover:text-[#527b0b] transition-colors"
-            >
+          <nav aria-label="Footer legal links" className="flex flex-wrap items-center gap-x-5 gap-y-3">
+            <a href="#statutory-terms" className="font-serif text-xs font-bold text-[#063629] transition-colors hover:text-[#57951e]">
               Statutory Terms
             </a>
-
-            <a
-              href="#privacy-policy"
-              className="font-serif text-[11px] font-bold tracking-wide hover:text-[#527b0b] transition-colors"
-            >
+            <span className="hidden h-4 w-px bg-[#9fb9a9] sm:block" />
+            <a href="#privacy-policy" className="font-serif text-xs font-bold text-[#063629] transition-colors hover:text-[#57951e]">
               Privacy Policy
             </a>
-
-            <a
-              href="tel:+9108023456789"
-              className="font-serif text-[11px] font-bold tracking-wide hover:text-[#527b0b] transition-colors"
-            >
+            <span className="hidden h-4 w-px bg-[#9fb9a9] sm:block" />
+            <a href="tel:+919188330335" className="font-serif text-xs font-bold text-[#063629] transition-colors hover:text-[#57951e]">
               Emergency Telemetry
             </a>
-
-          </div>
-
+          </nav>
         </div>
-
       </div>
-
     </footer>
   );
 }

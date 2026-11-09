@@ -81,12 +81,9 @@ export default function Contact() {
                 href="tel:+9108023456789"
                 className="font-serif text-[18px] font-bold text-white"
               >
-                +91 (080) 2345 6789
+                 +91 9188330335
               </a>
 
-              <p className="text-[12px] text-[#a8c8bb] mt-0.5">
-                +91 98450 12345 (Direct Site Engineer)
-              </p>
             </div>
           </div>
 
@@ -105,12 +102,12 @@ export default function Contact() {
                 href="mailto:info@specterra.com"
                 className="text-[14px] font-semibold text-white"
               >
-                info@specterra.com
+                project@specterra.in
               </a>
 
-              <p className="text-[12px] text-[#a8c8bb] mt-1">
+              {/* <p className="text-[12px] text-[#a8c8bb] mt-1">
                 compliance@specterra.com (KSPCB Inquiries)
-              </p>
+              </p> */}
             </div>
           </div>
 
@@ -126,11 +123,11 @@ export default function Contact() {
               </p>
 
               <p className="text-[14px] leading-[24px] text-white">
-                Specterra Towers, Plot #48-B
+                Ramankeriyil Building, 
                 <br />
-                Peenya Industrial Area, 2nd Phase
+                Chengalam South PO,
                 <br />
-                Bengaluru, Karnataka - 560058
+                Kottayam 686022
               </p>
             </div>
           </div>

@@ -72,7 +72,7 @@ export default function Home() {
               <Leaf size={16} className="text-[#a6f43e]" />
 
               <span className="text-white text-[10px] md:text-xs font-bold tracking-wide">
-                ISO 9001:2015 & ISO 14001:2015 CERTIFIED
+                ISO 9001:2015 CERTIFIED
               </span>
             </div>
 
