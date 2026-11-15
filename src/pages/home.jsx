@@ -18,6 +18,7 @@ import {
 import TrustedPartners from "../components/trustedPartners";
 import StrategicRoadmap from "../components/strategicRoadmap";
 import AppDownload from "../components/appDownload";
+import OfficeLocations from "../components/officeLocations";
 
 const stats = [
   { value: "15+", label: "Years of Experience", icon: Settings },
@@ -179,6 +180,8 @@ export default function Home() {
 
       {/* EXISTING CONTACT PAGE */}
       <Contact />
+
+      <OfficeLocations />
 
       <AppDownload />
     </>

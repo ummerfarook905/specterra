@@ -7,3 +7,15 @@ html {
 section {
   scroll-margin-top: 75px;
 }
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  font-family: inherit;
+}
+
+.custom-office-marker {
+  background: transparent;
+  border: none;
+}
