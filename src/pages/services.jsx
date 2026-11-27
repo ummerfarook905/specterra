@@ -1,58 +1,34 @@
 
+import { useEffect, useState } from "react";
 import {
   CheckCircle2,
+  Loader2,
+  Image as ImageIcon,
 } from "lucide-react";
-import etpImage from "../assets/water.png";
+import axios from "axios";
 
-const services = [
-  {
-    category: "ETP SYSTEMS",
-    title: "ETP (Effluent Treatment Plants)",
-    image: etpImage,
-    description:
-      "Turnkey design, fabrication, civil works, and commissioning of primary, secondary, and tertiary Effluent Treatment Plants tailored for pharmaceutical, chemical, textile, and manufacturing industries. Zero Liquid Discharge (ZLD) enabled.",
-    features: [
-      "Physicochemical Coagulation",
-      "Aeration & Clarifiers",
-      "MBR & RO Polishing",
-    ],
-    button: "Learn More & View Specs",
-    link: "#etp",
-    type: "normal",
-  },
-  {
-    category: "TURNKEY ERECTION",
-    title: "Equipment & Plant Installation",
-    image:
-      "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=900&q=85",
-    description:
-      "Precision on-site erection, mechanical piping, automated PLC pump skids, aeration diffuser networks, and turnkey mechanical & electrical commissioning supervised by certified industrial engineers.",
-    features: [
-      "Turnkey Erection & Piping",
-      "Hydro-testing & Rigorous QA",
-      "Preventative Maintenance AMCs",
-    ],
-    button: "View Installation Services",
-    link: "#installation",
-    type: "normal",
-  },
-  {
-    category: "BIO-AUGMENTATION",
-    title: "Aerobic Bacteria Culture",
-    image:
-      "https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=900&q=85",
-    description:
-      "High-potency bio-augmentation and specialized microbial aerobic bacteria consortia to rapidly develop MLSS, accelerate BOD/COD degradation, and stabilize biological reactor performance.",
-    features: [
-      "Rapid MLSS Development",
-      "Odor Control & Sludge Reduction",
-      "Lab-tested Viability & Potency",
-    ],
-    button: "Order Biological Culture",
-    link: "#biological-culture",
-    type: "normal",
-  },
-];
+const API_URL =
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
+
+const API_ORIGIN = API_URL.replace(/\/api\/?$/, "").replace(/\/+$/, "");
+
+const getImageUrl = (image) => {
+  if (!image) return "";
+
+  if (/^https?:\/\//i.test(image)) {
+    return image;
+  }
+
+  let imagePath = image
+    .replace(/^\/?api\/uploads\//i, "/uploads/")
+    .replace(/^uploads\//i, "/uploads/");
+
+  if (!imagePath.startsWith("/")) {
+    imagePath = `/uploads/${imagePath}`;
+  }
+
+  return `${API_ORIGIN}${imagePath}`;
+};
 
 function ServiceCard({ service }) {
   return (
@@ -61,12 +37,21 @@ function ServiceCard({ service }) {
       {/* Image */}
       <div className="relative h-[220px] sm:h-[240px] overflow-hidden">
 
-        <img
-          src={service.image}
-          alt={service.title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          loading="lazy"
-        />
+        {service.image ? (
+          <img
+            src={getImageUrl(service.image)}
+            alt={service.title}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            loading="lazy"
+            onError={(e) => {
+              e.currentTarget.style.display = "none";
+            }}
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center bg-[#e8efea]">
+            <ImageIcon size={40} className="text-[#9aafa2]" />
+          </div>
+        )}
 
         {/* Category Badge */}
         <div className="absolute top-2 left-2 bg-[#063629] px-3 py-1">
@@ -89,20 +74,22 @@ function ServiceCard({ service }) {
         </p>
 
         {/* Features */}
-        <ul className="space-y-1 mb-5">
-          {service.features.map((feature, index) => (
-            <li
-              key={index}
-              className="flex items-center gap-1.5 font-serif text-[13px] font-bold tracking-wide text-[#063629]"
-            >
-              <CheckCircle2
-                size={14}
-                className="text-[#527b0b] shrink-0"
-              />
-              {feature}
-            </li>
-          ))}
-        </ul>
+        {Array.isArray(service.features) && (
+          <ul className="space-y-1 mb-5">
+            {service.features.map((feature, index) => (
+              <li
+                key={`${service.id}-${index}`}
+                className="flex items-center gap-1.5 font-serif text-[13px] font-bold tracking-wide text-[#063629]"
+              >
+                <CheckCircle2
+                  size={14}
+                  className="text-[#527b0b] shrink-0"
+                />
+                {feature}
+              </li>
+            ))}
+          </ul>
+        )}
 
       </div>
     </article>
@@ -110,6 +97,51 @@ function ServiceCard({ service }) {
 }
 
 export default function Services() {
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        setLoading(true);
+        setError("");
+
+        // Public API request - no login required
+        const response = await axios.get(`${API_URL}/services`);
+
+        if (!response.data.success) {
+          throw new Error("Failed to fetch services");
+        }
+
+        const serviceData = Array.isArray(response.data.data)
+          ? response.data.data
+          : [];
+
+        const activeServices = serviceData
+          .filter((service) => service.isActive !== false)
+          .sort(
+            (a, b) =>
+              (a.sortOrder ?? 0) - (b.sortOrder ?? 0)
+          );
+
+        setServices(activeServices);
+
+      } catch (err) {
+        console.error("Services API error:", err);
+
+        setError(
+          err.response?.data?.message ||
+          "Unable to load services. Please try again later."
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchServices();
+  }, []);
+
   return (
     <section
       id="services"
@@ -143,16 +175,35 @@ export default function Services() {
         </div>
 
         {/* SERVICE CARDS */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-          {services.map((service, index) => (
-            <ServiceCard
-              key={index}
-              service={service}
+        {loading ? (
+          <div className="flex items-center justify-center min-h-[300px]">
+            <Loader2
+              size={35}
+              className="animate-spin text-[#063629]"
             />
-          ))}
+          </div>
+        ) : error ? (
+          <div className="py-10 text-center">
+            <p className="text-sm text-red-600">{error}</p>
+          </div>
+        ) : services.length === 0 ? (
+          <div className="py-10 text-center">
+            <p className="text-sm text-[#46504b]">
+              No services available.
+            </p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
-        </div>
+            {services.map((service) => (
+              <ServiceCard
+                key={service.id}
+                service={service}
+              />
+            ))}
+
+          </div>
+        )}
 
       </div>
     </section>

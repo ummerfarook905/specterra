@@ -5,12 +5,12 @@ import {
   BadgeCheck,
   Headset,
 } from "lucide-react";
-import meenakshi from "../assets/meenakshi.png";
-import venkadesh from "../assets/venkadesh.png";
-import priya from "../assets/priya.png";
-import arun from "../assets/arun.png";
 import logoIcon from "../assets/logo.png";
 import StrategicRoadmap from "../components/strategicRoadmap";
+
+import { useEffect, useState } from "react";
+import { Loader2 } from "lucide-react";
+import axios from "axios";
 
 const features = [
   {
@@ -39,64 +39,6 @@ const features = [
   },
 ];
 
-// ==========================================
-// LEADERSHIP TEAM DATA
-// ==========================================
-
-const teamMembers = [
-  {
-    name: "Dr. R. Venkatesh",
-    qualification: "Ph.D., Senior Environmental Engineer",
-    designation: "Managing Director & Head of EIA",
-    experience: "22+ Yrs Exp",
-    badge: "EIA LEADER / MOEF",
-    image: venkadesh,
-    description:
-      "Oversees turnkey Zero Liquid Discharge designs, catalytic oxidation, and statutory environmental audits across industrial clusters.",
-    skills: ["KSPCB Accredited", "ZLD Systems", "EIA Expert"],
-    location: "Dir-01 / Peenya HQ",
-    achievement: "85+ Papers",
-  },
-  {
-    name: "Er. Priya Nambiar",
-    qualification: "M.Tech, Chief Hydrological Scientist",
-    designation: "Lead Hydrogeologist",
-    experience: "16+ Yrs Exp",
-    badge: "CGWA CERTIFIED",
-    image: priya,
-    description:
-      "Leads electrical resistivity tomography, sub-surface piezometer modeling, groundwater yield audits, and rainwater harvesting designs.",
-    skills: ["ERT Profiling", "Rainwater Tests", "CGWA License"],
-    location: "Hyd-02 / Field Unit",
-    achievement: "400+ Surveys",
-  },
-  {
-    name: "Er. Arunachalam M.",
-    qualification: "B.E. (Mech), Turnkey Projects",
-    designation: "VP of Turnkey Plant Execution",
-    experience: "19+ Yrs Exp",
-    badge: "35+ TURNKEY PLANTS",
-    image: arun,
-    description:
-      "Directs heavy industrial civil erection, automated pump skids, aeration diffuser arrays, and membrane bioreactor systems.",
-    skills: ["Civil & Mech", "PLC Automation", "MBR/RO Skids"],
-    location: "Eng-03 / Plant Works",
-    achievement: "Zero LTI Record",
-  },
-  {
-    name: "S. Meenakshi",
-    qualification: "M.Sc, Industrial Microbiology",
-    designation: "Head of Bio-culture Formulation",
-    experience: "14+ Yrs Exp",
-    badge: "ISO LAB HEAD",
-    image: meenakshi,
-    description:
-      "Specializes in aerobic microbial consortia stabilization, MLSS propagation, and toxic-load shock recovery in biological reactors.",
-    skills: ["Bio-Augmentation", "MLSS Kinetics", "Odor Mitigation"],
-    location: "Bio-04 / BioMax R&D",
-    achievement: "95% MLSS Yield",
-  },
-];
 
  function AboutSection() {
   return (
@@ -242,7 +184,78 @@ const teamMembers = [
 
 
 
+const API_URL = (
+  import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api"
+).replace(/\/+$/, "");
+
+const API_ORIGIN = API_URL
+  .replace(/\/api(?:\/v\d+)?$/i, "")
+  .replace(/\/+$/, "");
+
+const getImageUrl = (image) => {
+  if (!image) return "";
+
+  if (/^(https?:)?\/\//i.test(image)) return image;
+  if (/^(data|blob):/i.test(image)) return image;
+
+  let imagePath = image
+    .replace(/^\/?api\/uploads\//i, "/uploads/")
+    .replace(/^uploads\//i, "/uploads/");
+
+  if (!imagePath.startsWith("/")) {
+    imagePath = `/uploads/${imagePath}`;
+  }
+
+  return `${API_ORIGIN}${imagePath}`;
+};
+
 function LeadershipSection() {
+  const [teamMembers, setTeamMembers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    const fetchTeam = async () => {
+      try {
+        setLoading(true);
+        setError("");
+
+        const response = await axios.get(`${API_URL}/team`, {
+          signal: controller.signal,
+        });
+
+        const members = Array.isArray(response.data.data)
+          ? response.data.data
+          : [];
+
+        const activeMembers = members
+          .filter((member) => member.isActive !== false)
+          .sort(
+            (a, b) =>
+              Number(a.sortOrder ?? 0) -
+              Number(b.sortOrder ?? 0)
+          );
+
+        setTeamMembers(activeMembers);
+      } catch (err) {
+        if (err.name === "CanceledError") return;
+
+        console.error("Fetch team error:", err);
+        setError("Unable to load the leadership team.");
+      } finally {
+        if (!controller.signal.aborted) {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchTeam();
+
+    return () => controller.abort();
+  }, []);
+
   return (
     <section className="w-full bg-[#eaf0ed] px-4 py-8 sm:px-6 md:px-8 lg:px-10 lg:py-10">
       <div className="mx-auto max-w-[1440px]">
@@ -267,95 +280,119 @@ function LeadershipSection() {
           </p>
         </div>
 
-        {/* LEADERSHIP CARDS */}
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {/* LOADING */}
+        {loading ? (
+          <div className="flex min-h-[220px] items-center justify-center">
+            <Loader2
+              size={32}
+              className="animate-spin text-[#063629]"
+            />
+          </div>
+        ) : error ? (
+          <div className="py-10 text-center">
+            <p className="text-sm text-red-600">{error}</p>
+          </div>
+        ) : teamMembers.length === 0 ? (
+          <div className="py-10 text-center">
+            <p className="text-sm text-[#46504b]">
+              No team members available.
+            </p>
+          </div>
+        ) : (
 
-          {teamMembers.map((member) => (
-            <article
-              key={member.name}
-              className="flex min-w-0 flex-col overflow-hidden rounded-[5px] border border-[#dce5df] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
-            >
+          /* LEADERSHIP CARDS */
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
 
-              {/* IMAGE AREA */}
-              <div className="relative aspect-[1.15/1] w-full overflow-hidden bg-gradient-to-br from-[#164c3a] via-[#0b382a] to-[#05291f]">
+            {teamMembers.map((member) => (
+              <article
+                key={member.id}
+                className="flex min-w-0 flex-col overflow-hidden rounded-[5px] border border-[#dce5df] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+              >
 
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  loading="lazy"
-                  onError={(e) => {
-                    e.currentTarget.style.display = "none";
-                  }}
-                  className="absolute inset-0 h-full w-full object-cover object-center"
-                />
+                {/* IMAGE AREA */}
+                <div className="relative aspect-[1.15/1] w-full overflow-hidden bg-gradient-to-br from-[#164c3a] via-[#0b382a] to-[#05291f]">
 
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/5" />
+                  {member.image && (
+                    <img
+                      src={getImageUrl(member.image)}
+                      alt={member.name}
+                      loading="lazy"
+                      onError={(e) => {
+                        e.currentTarget.style.display = "none";
+                      }}
+                      className="absolute inset-0 h-full w-full object-cover object-center"
+                    />
+                  )}
 
-                {/* TOP BADGE */}
-                <span className="absolute left-1.5 top-1.5 max-w-[85%] truncate rounded-[2px] border border-[#9dfb58]/30 bg-[#063629]/95 px-1.5 py-1 text-[7px] font-bold tracking-wide text-[#c9ff8c]">
-                  <span className="mr-1 text-[#9dfb58]">✥</span>
-                  {member.badge}
-                </span>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-black/5" />
 
-                {/* EXPERIENCE BADGE */}
-                <span className="absolute bottom-1.5 right-1.5 rounded-[2px] bg-[#a8e85c] px-1.5 py-0.5 text-[9px] font-bold text-[#153b20]">
-                  {member.experience}
-                </span>
-              </div>
+                  {/* TOP BADGE */}
+                  <span className="absolute left-1.5 top-1.5 max-w-[85%] truncate rounded-[2px] border border-[#9dfb58]/30 bg-[#063629]/95 px-1.5 py-1 text-[7px] font-bold tracking-wide text-[#c9ff8c]">
+                    <span className="mr-1 text-[#9dfb58]">✥</span>
+                    {member.badge}
+                  </span>
 
-              {/* CARD CONTENT */}
-              <div className="flex flex-1 flex-col p-2 sm:p-2.5">
-
-                {/* NAME */}
-                <h3 className="font-serif text-[18px] font-bold leading-tight text-[#063629]">
-                  {member.name}
-                </h3>
-
-                {/* QUALIFICATION */}
-                <p className="mt-0.5 text-[12px] font-bold leading-[12px] text-[#527b0b]">
-                  {member.qualification}
-                </p>
-
-                {/* DESIGNATION */}
-                <p className="text-[12px] leading-[12px] text-[#46504b]">
-                  {member.designation}
-                </p>
-
-                {/* DESCRIPTION */}
-                <p className="mt-2 text-[12px] leading-[13px] text-[#343d38]">
-                  {member.description}
-                </p>
-
-                {/* SKILLS */}
-                <div className="mt-2 flex flex-wrap gap-1">
-                  {member.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="border border-[#dce5df] bg-[#edf3ef] px-1 py-0.5 text-[11px] font-semibold leading-tight text-[#244b36]"
-                    >
-                      {skill}
-                    </span>
-                  ))}
+                  {/* EXPERIENCE BADGE */}
+                  <span className="absolute bottom-1.5 right-1.5 rounded-[2px] bg-[#a8e85c] px-1.5 py-0.5 text-[9px] font-bold text-[#153b20]">
+                    {member.experience}
+                  </span>
                 </div>
 
-                {/* BOTTOM INFORMATION */}
-                <div className="mt-auto pt-3">
+                {/* CARD CONTENT */}
+                <div className="flex flex-1 flex-col p-2 sm:p-2.5">
 
-                  <div className="mb-1.5 flex items-center justify-between gap-1 border-t border-[#e3e9e5] pt-2 text-[11px]">
-                    <span className="truncate text-[#68756d]">
-                      {member.location}
-                    </span>
+                  {/* NAME */}
+                  <h3 className="font-serif text-[18px] font-bold leading-tight text-[#063629]">
+                    {member.name}
+                  </h3>
 
-                    <span className="shrink-0 font-bold text-[#527b0b]">
-                      {member.achievement}
-                    </span>
+                  {/* QUALIFICATION */}
+                  <p className="mt-0.5 text-[12px] font-bold leading-[12px] text-[#527b0b]">
+                    {member.qualification}
+                  </p>
+
+                  {/* DESIGNATION */}
+                  <p className="text-[12px] leading-[12px] text-[#46504b]">
+                    {member.designation}
+                  </p>
+
+                  {/* DESCRIPTION */}
+                  <p className="mt-2 text-[12px] leading-[13px] text-[#343d38]">
+                    {member.description}
+                  </p>
+
+                  {/* SKILLS */}
+                  <div className="mt-2 flex flex-wrap gap-1">
+                    {(Array.isArray(member.skills) ? member.skills : []).map(
+                      (skill, index) => (
+                        <span
+                          key={`${member.id}-skill-${index}`}
+                          className="border border-[#dce5df] bg-[#edf3ef] px-1 py-0.5 text-[11px] font-semibold leading-tight text-[#244b36]"
+                        >
+                          {skill}
+                        </span>
+                      )
+                    )}
+                  </div>
+
+                  {/* BOTTOM INFORMATION */}
+                  <div className="mt-auto pt-3">
+                    <div className="mb-1.5 flex items-center justify-between gap-1 border-t border-[#e3e9e5] pt-2 text-[11px]">
+                      <span className="truncate text-[#68756d]">
+                        {member.location}
+                      </span>
+
+                      <span className="shrink-0 font-bold text-[#527b0b]">
+                        {member.achievement}
+                      </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            ))}
 
-        </div>
+          </div>
+        )}
       </div>
     </section>
   );

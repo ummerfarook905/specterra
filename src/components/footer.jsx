@@ -159,19 +159,46 @@ export default function Footer() {
             © 2025 Specterra Engineering &amp; Environmental Pvt. Ltd. All rights
             reserved. Registered ISO Certified Enterprise.
           </p>
-          <nav aria-label="Footer legal links" className="flex flex-wrap items-center gap-x-5 gap-y-3">
-            <a href="#statutory-terms" className="font-serif text-xs font-bold text-[#063629] transition-colors hover:text-[#57951e]">
-              Statutory Terms
-            </a>
-            <span className="hidden h-4 w-px bg-[#9fb9a9] sm:block" />
-            <a href="#privacy-policy" className="font-serif text-xs font-bold text-[#063629] transition-colors hover:text-[#57951e]">
-              Privacy Policy
-            </a>
-            <span className="hidden h-4 w-px bg-[#9fb9a9] sm:block" />
-            <a href="tel:+919188330335" className="font-serif text-xs font-bold text-[#063629] transition-colors hover:text-[#57951e]">
-              Emergency Telemetry
-            </a>
-          </nav>
+          
+<nav
+  aria-label="Footer legal links"
+  className="flex flex-wrap items-center gap-x-5 gap-y-3"
+>
+  <a
+    href="#statutory-terms"
+    className="font-serif text-xs font-bold text-[#063629] transition-colors hover:text-[#57951e]"
+  >
+    Statutory Terms
+  </a>
+
+  <span className="hidden h-4 w-px bg-[#9fb9a9] sm:block" />
+
+  <a
+    href="#privacy-policy"
+    className="font-serif text-xs font-bold text-[#063629] transition-colors hover:text-[#57951e]"
+  >
+    Privacy Policy
+  </a>
+
+  <span className="hidden h-4 w-px bg-[#9fb9a9] sm:block" />
+
+  <a
+    href="tel:+919188330335"
+    className="font-serif text-xs font-bold text-[#063629] transition-colors hover:text-[#57951e]"
+  >
+    Emergency Telemetry
+  </a>
+
+  <span className="hidden h-4 w-px bg-[#9fb9a9] sm:block" />
+
+  <Link
+    to="/admin/login"
+    className="inline-flex items-center gap-2 rounded-md bg-[#104735] px-4 py-2 font-serif text-xs font-bold text-white transition-all hover:bg-[#17613e]"
+  >
+    Admin Login
+  </Link>
+</nav>
+
         </div>
       </div>
     </footer>
